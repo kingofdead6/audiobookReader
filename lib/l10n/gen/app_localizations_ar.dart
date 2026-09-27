@@ -230,4 +230,68 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get tapSentenceHint => 'تلميح: اضغط على أي جملة لبدء القراءة منها.';
+
+  @override
+  String get voiceModels => 'نماذج الأصوات';
+
+  @override
+  String get voiceModelsIntro =>
+      'تعمل الأصوات الطبيعية بالكامل على هذا الهاتف. تُنزَّل مرة واحدة من مشروع sherpa-onnx مفتوح المصدر على GitHub وتُحفظ في مساحة التطبيق. عند الانتقال إلى هاتف جديد، نزّلها مجددًا من هنا.';
+
+  @override
+  String get download => 'تنزيل';
+
+  @override
+  String get resume => 'استئناف';
+
+  @override
+  String get installed => 'مثبّت';
+
+  @override
+  String get notDownloaded => 'غير مُنزَّل';
+
+  @override
+  String downloadedOf(String received, String total) {
+    return '$received من $total ميغابايت';
+  }
+
+  @override
+  String get verifying => 'جارٍ التحقق من سلامة الملف…';
+
+  @override
+  String get extracting => 'جارٍ فك الضغط… قد يستغرق ذلك دقيقة أو دقيقتين.';
+
+  @override
+  String sizeMb(String size) {
+    return '$size ميغابايت';
+  }
+
+  @override
+  String freeSpace(String size) {
+    return 'المساحة المتاحة على الجهاز: $size ميغابايت';
+  }
+
+  @override
+  String get engineSystem => 'النظام';
+
+  @override
+  String get engineQari => 'قارئ (دون اتصال)';
+
+  @override
+  String get getVoicesTitle => 'احصل على أصوات طبيعية';
+
+  @override
+  String get getVoicesBody =>
+      'نزّل صوت Kokoro الإنجليزي وصوت كريم العربي (حوالي 200 ميغابايت، مرة واحدة) لقراءة أكثر طبيعية. يعمل صوت النظام في هذه الأثناء.';
+
+  @override
+  String get later => 'لاحقًا';
+
+  @override
+  String get downloadVoiceHint => 'نزّل صوت قارئ لهذه اللغة لاستخدامه.';
+
+  @override
+  String deleteModelConfirm(String title) {
+    return 'حذف «$title»؟ يمكنك تنزيله مجددًا لاحقًا.';
+  }
 }

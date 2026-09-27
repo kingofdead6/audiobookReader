@@ -15,6 +15,7 @@ import '../preview/text_preview_screen.dart';
 import '../settings/settings_screen.dart';
 import '../widgets/error_text.dart';
 import 'book_card.dart';
+import 'voice_prompt.dart';
 
 class LibraryScreen extends ConsumerWidget {
   const LibraryScreen({super.key});
@@ -50,31 +51,40 @@ class LibraryScreen extends ConsumerWidget {
         icon: const Icon(Icons.add),
         label: Text(l.importPdf),
       ),
-      body: books.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(child: Text(errorMessage(l, e))),
-        data: (list) => list.isEmpty
-            ? _EmptyLibrary(onImport: () => _import(context, ref))
-            : GridView.builder(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
-                  childAspectRatio: 0.52,
-                ),
-                itemCount: list.length,
-                itemBuilder: (context, i) => BookCard(
-                  book: list[i],
-                  onTap: () => openBook(context, list[i]),
-                  onPreview: () => Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => TextPreviewScreen(bookId: list[i].id),
+      body: Column(
+        children: [
+          const VoicePrompt(),
+          Expanded(
+            child: books.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (e, _) => Center(child: Text(errorMessage(l, e))),
+              data: (list) => list.isEmpty
+                  ? _EmptyLibrary(onImport: () => _import(context, ref))
+                  : GridView.builder(
+                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
+                      gridDelegate:
+                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 200,
+                            mainAxisSpacing: 16,
+                            crossAxisSpacing: 16,
+                            childAspectRatio: 0.52,
+                          ),
+                      itemCount: list.length,
+                      itemBuilder: (context, i) => BookCard(
+                        book: list[i],
+                        onTap: () => openBook(context, list[i]),
+                        onPreview: () => Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) =>
+                                TextPreviewScreen(bookId: list[i].id),
+                          ),
+                        ),
+                        onDelete: () => _delete(context, ref, list[i]),
+                      ),
                     ),
-                  ),
-                  onDelete: () => _delete(context, ref, list[i]),
-                ),
-              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -230,4 +230,69 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tapSentenceHint =>
       'Tip: tap any sentence to start reading from there.';
+
+  @override
+  String get voiceModels => 'Voice models';
+
+  @override
+  String get voiceModelsIntro =>
+      'Natural voices run entirely on this phone. They are downloaded once from the open-source sherpa-onnx project on GitHub and kept in the app\'s storage. On a new phone, download them again here.';
+
+  @override
+  String get download => 'Download';
+
+  @override
+  String get resume => 'Resume';
+
+  @override
+  String get installed => 'Installed';
+
+  @override
+  String get notDownloaded => 'Not downloaded';
+
+  @override
+  String downloadedOf(String received, String total) {
+    return '$received of $total MB';
+  }
+
+  @override
+  String get verifying => 'Verifying file integrity…';
+
+  @override
+  String get extracting => 'Unpacking… this can take a minute or two.';
+
+  @override
+  String sizeMb(String size) {
+    return '$size MB';
+  }
+
+  @override
+  String freeSpace(String size) {
+    return 'Free space on device: $size MB';
+  }
+
+  @override
+  String get engineSystem => 'System';
+
+  @override
+  String get engineQari => 'Qari (offline)';
+
+  @override
+  String get getVoicesTitle => 'Get natural voices';
+
+  @override
+  String get getVoicesBody =>
+      'Download the Kokoro English and Kareem Arabic voices (about 200 MB, once) for much more natural reading. The system voice works in the meantime.';
+
+  @override
+  String get later => 'Later';
+
+  @override
+  String get downloadVoiceHint =>
+      'Download a Qari voice for this language to use it.';
+
+  @override
+  String deleteModelConfirm(String title) {
+    return 'Delete “$title”? You can download it again later.';
+  }
 }

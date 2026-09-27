@@ -144,5 +144,54 @@
   "testSentenceAr": "هكذا سيبدو النص العربي عند قراءته.",
   "ttsSettings": "Android text-to-speech settings",
   "noVoicesFound": "No offline voices found for this language.",
-  "tapSentenceHint": "Tip: tap any sentence to start reading from there."
+  "tapSentenceHint": "Tip: tap any sentence to start reading from there.",
+  "voiceModels": "Voice models",
+  "voiceModelsIntro": "Natural voices run entirely on this phone. They are downloaded once from the open-source sherpa-onnx project on GitHub and kept in the app's storage. On a new phone, download them again here.",
+  "download": "Download",
+  "resume": "Resume",
+  "installed": "Installed",
+  "notDownloaded": "Not downloaded",
+  "downloadedOf": "{received} of {total} MB",
+  "@downloadedOf": {
+    "placeholders": {
+      "received": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "verifying": "Verifying file integrity…",
+  "extracting": "Unpacking… this can take a minute or two.",
+  "sizeMb": "{size} MB",
+  "@sizeMb": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "freeSpace": "Free space on device: {size} MB",
+  "@freeSpace": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "engineSystem": "System",
+  "engineQari": "Qari (offline)",
+  "getVoicesTitle": "Get natural voices",
+  "getVoicesBody": "Download the Kokoro English and Kareem Arabic voices (about 200 MB, once) for much more natural reading. The system voice works in the meantime.",
+  "later": "Later",
+  "downloadVoiceHint": "Download a Qari voice for this language to use it.",
+  "deleteModelConfirm": "Delete “{title}”? You can download it again later.",
+  "@deleteModelConfirm": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  }
 }

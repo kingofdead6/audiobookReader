@@ -6,6 +6,7 @@ import '../../data/system_channel.dart';
 import '../../domain/entities/app_settings.dart';
 import '../../domain/entities/lang.dart';
 import '../../l10n/gen/app_localizations.dart';
+import '../downloads/downloads_screen.dart';
 import 'voice_section.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -62,6 +63,14 @@ class SettingsScreen extends ConsumerWidget {
             ),
           ),
           _Header(l.voices),
+          ListTile(
+            leading: const Icon(Icons.download_for_offline_outlined),
+            title: Text(l.voiceModels),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(builder: (_) => const DownloadsScreen()),
+            ),
+          ),
           const VoiceSection(lang: Lang.en),
           const VoiceSection(lang: Lang.ar),
           ListTile(

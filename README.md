@@ -10,7 +10,7 @@ keys, no analytics.
 |---|---|---|
 | M1 | PDF import, text extraction, Arabic normalization, text preview | ✅ |
 | M2 | System TTS playback, sentence streaming, language switching, highlighting | ✅ |
-| M3 | Voice model download manager + sherpa-onnx (Kokoro EN, Piper AR) | ⏳ |
+| M3 | Voice model download manager + sherpa-onnx (Kokoro EN, Piper AR) | ✅ |
 | M4 | Background playback, resume, speed, sleep timer, library polish | ⏳ |
 
 ## Requirements
@@ -87,6 +87,38 @@ Text pipeline (runs once at import, result cached in SQLite):
    at 280 characters (split at `, ; : ، ؛`, then spaces).
 6. **LanguageDetector**: Arabic vs Latin script per sentence; long foreign
    runs inside a sentence become separate chunks for the other voice.
+
+### Voices
+
+| Engine | English | Arabic | Download |
+|---|---|---|---|
+| System (flutter_tts → Android TTS) | installed Android voice | installed Android voice | none |
+| Qari / sherpa-onnx 1.13.8 | Kokoro v1.0 int8, 28 voices (132 MB) | Piper `ar_JO-kareem-medium` (67 MB) | on request |
+| Qari / sherpa-onnx (optional) | Piper `en_US-lessac-medium`, fast (67 MB) | — | on request |
+
+Models come from the official
+[sherpa-onnx `tts-models` release](https://github.com/k2-fsa/sherpa-onnx/releases/tag/tts-models)
+and are stored in the app's documents directory (`models/`). Each download
+is resumable (HTTP Range), checked against a pinned size and SHA-256
+(`lib/data/models/model_catalog.dart`), unpacked in a background isolate and
+only then marked installed. On a new phone, download them again from
+Settings → Voice models.
+
+If the neural engine fails (bad model, isolate crash) the router switches
+that language to the system voice for the rest of the session and shows a
+notice.
+
+Measured on the 4-core build VM (x86, sherpa-onnx Dart, 4 threads):
+Kokoro real-time factor ≈ 1.1, Piper ≈ 0.05. Phones differ; if Kokoro cannot
+keep up on an older phone (you hear pauses between sentences), download the
+fast Piper English voice and pick it in Settings.
+
+Run the real engine on a desktop (after extracting the archives into a folder):
+
+```bash
+LD_LIBRARY_PATH=~/.pub-cache/hosted/pub.dev/sherpa_onnx_linux-1.13.8/linux/x64 \
+QARI_MODELS_DIR=/path/to/models flutter test test/integration
+```
 
 ### Package choices
 

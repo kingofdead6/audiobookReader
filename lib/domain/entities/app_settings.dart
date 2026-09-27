@@ -16,6 +16,7 @@ class AppSettings {
     },
     this.voices = const {},
     this.speed = 1.0,
+    this.voicePromptDismissed = false,
   });
 
   final AppThemeMode themeMode;
@@ -30,6 +31,9 @@ class AppSettings {
   /// Playback speed 0.5–2.0.
   final double speed;
 
+  /// The first-launch "download natural voices" prompt was dismissed.
+  final bool voicePromptDismissed;
+
   TtsEngineId engineFor(Lang lang) => engines[lang] ?? TtsEngineId.system;
   String? voiceFor(Lang lang, TtsEngineId engine) =>
       voices[voiceKey(lang, engine)];
@@ -43,12 +47,14 @@ class AppSettings {
     Map<Lang, TtsEngineId>? engines,
     Map<String, String>? voices,
     double? speed,
+    bool? voicePromptDismissed,
   }) => AppSettings(
     themeMode: themeMode ?? this.themeMode,
     localeCode: localeCode != null ? localeCode() : this.localeCode,
     engines: engines ?? this.engines,
     voices: voices ?? this.voices,
     speed: speed ?? this.speed,
+    voicePromptDismissed: voicePromptDismissed ?? this.voicePromptDismissed,
   );
 
   // --- flat key/value (de)serialization for the settings table ---
@@ -59,6 +65,7 @@ class AppSettings {
     for (final e in engines.entries) 'engine.${e.key.name}': e.value.name,
     for (final e in voices.entries) 'voice.${e.key}': e.value,
     'speed': speed.toString(),
+    'voicePromptDismissed': voicePromptDismissed.toString(),
   };
 
   factory AppSettings.fromMap(Map<String, String> m) {
@@ -80,6 +87,7 @@ class AppSettings {
           if (e.key.startsWith('voice.')) e.key.substring(6): e.value,
       },
       speed: (double.tryParse(m['speed'] ?? '') ?? 1.0).clamp(0.5, 2.0),
+      voicePromptDismissed: m['voicePromptDismissed'] == 'true',
     );
   }
 }

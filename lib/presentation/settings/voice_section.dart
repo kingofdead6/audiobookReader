@@ -6,10 +6,13 @@ import 'package:just_audio/just_audio.dart';
 import 'package:path/path.dart' as p;
 
 import '../../app/providers.dart';
+import '../../data/models/model_catalog.dart';
+import '../../data/models/model_manager.dart';
 import '../../domain/entities/app_settings.dart';
 import '../../domain/entities/lang.dart';
 import '../../domain/tts/tts_engine.dart';
 import '../../l10n/gen/app_localizations.dart';
+import '../downloads/downloads_screen.dart';
 import '../widgets/error_text.dart';
 
 /// Voices offered by [engine] for [lang].
@@ -23,12 +26,9 @@ final voicesProvider = FutureProvider.autoDispose
 
 /// Engine + voice picker and a "test" button for one language.
 class VoiceSection extends ConsumerStatefulWidget {
-  const VoiceSection({super.key, required this.lang, this.engineSelector});
+  const VoiceSection({super.key, required this.lang});
 
   final Lang lang;
-
-  /// Engine choice widget (added in M3); null shows the system engine only.
-  final Widget? engineSelector;
 
   @override
   ConsumerState<VoiceSection> createState() => _VoiceSectionState();
@@ -84,10 +84,8 @@ class _VoiceSectionState extends ConsumerState<VoiceSection> {
               l.voiceFor(_langName(l)),
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            if (widget.engineSelector != null) ...[
-              const SizedBox(height: 8),
-              widget.engineSelector!,
-            ],
+            const SizedBox(height: 8),
+            _EngineSelector(lang: widget.lang, selected: engine),
             const SizedBox(height: 8),
             voices.when(
               loading: () => const LinearProgressIndicator(),
@@ -147,6 +145,61 @@ class _VoiceSectionState extends ConsumerState<VoiceSection> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _EngineSelector extends ConsumerWidget {
+  const _EngineSelector({required this.lang, required this.selected});
+  final Lang lang;
+  final TtsEngineId selected;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
+    final states = ref.watch(modelStatesProvider);
+    final hasModel = voiceModels.any(
+      (m) => m.lang == lang && states[m.id]?.status == ModelStatus.installed,
+    );
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        SegmentedButton<TtsEngineId>(
+          segments: [
+            ButtonSegment(
+              value: TtsEngineId.system,
+              label: Text(l.engineSystem),
+              icon: const Icon(Icons.phone_android),
+            ),
+            ButtonSegment(
+              value: TtsEngineId.sherpa,
+              label: Text(l.engineQari),
+              icon: const Icon(Icons.graphic_eq),
+              enabled: hasModel,
+            ),
+          ],
+          selected: {hasModel ? selected : TtsEngineId.system},
+          onSelectionChanged: (v) => ref
+              .read(settingsProvider.notifier)
+              .update(
+                (s) => s.copyWith(engines: {...s.engines, lang: v.first}),
+              ),
+        ),
+        if (!hasModel)
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: TextButton.icon(
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => const DownloadsScreen(),
+                ),
+              ),
+              icon: const Icon(Icons.download, size: 18),
+              label: Text(l.downloadVoiceHint),
+            ),
+          ),
+      ],
     );
   }
 }

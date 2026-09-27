@@ -2,9 +2,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/app_paths.dart';
 import '../data/db/app_database.dart';
+import '../data/models/model_catalog.dart';
+import '../data/models/model_manager.dart';
 import '../data/pdf/pdfrx_text_source.dart';
 import '../data/repositories/drift_book_repository.dart';
 import '../data/repositories/drift_settings_repository.dart';
+import '../data/system_channel.dart';
+import '../data/tts/sherpa_tts_engine.dart';
 import '../data/tts/system_tts_engine.dart';
 import '../domain/entities/app_settings.dart';
 import '../domain/entities/book.dart';
@@ -77,9 +81,18 @@ final settingsProvider = NotifierProvider<SettingsController, AppSettings>(
 
 final systemTtsProvider = Provider<SystemTtsEngine>((ref) => SystemTtsEngine());
 
-/// All engines by id. M3 adds the sherpa-onnx engine here.
+final sherpaTtsProvider = Provider<SherpaTtsEngine>((ref) {
+  final engine = SherpaTtsEngine(models: ref.watch(modelManagerProvider));
+  ref.onDispose(engine.dispose);
+  return engine;
+});
+
+/// All engines by id.
 final ttsEnginesProvider = Provider<Map<TtsEngineId, TtsEngine>>(
-  (ref) => {TtsEngineId.system: ref.watch(systemTtsProvider)},
+  (ref) => {
+    TtsEngineId.system: ref.watch(systemTtsProvider),
+    TtsEngineId.sherpa: ref.watch(sherpaTtsProvider),
+  },
 );
 
 final ttsRouterProvider = Provider<TtsRouter>((ref) {
@@ -107,3 +120,102 @@ final readerStateProvider = StreamProvider<ReaderState>((ref) {
   final player = ref.watch(readerPlayerProvider);
   return player.states;
 });
+
+// ---------------------------------------------------------- voice models
+
+final modelManagerProvider = Provider<ModelManager>((ref) {
+  final m = ModelManager(
+    modelsDir: ref.watch(appPathsProvider).models,
+    freeBytes: const SystemChannel().freeBytes,
+  );
+  ref.onDispose(m.dispose);
+  return m;
+});
+
+/// Live status of every catalog model, keyed by model id.
+class ModelStates extends Notifier<Map<String, ModelProgress>> {
+  @override
+  Map<String, ModelProgress> build() {
+    final manager = ref.watch(modelManagerProvider);
+    final sub = manager.progress.listen((e) {
+      final (id, progress) = e;
+      state = {...state, id: progress};
+      if (progress.status == ModelStatus.installed) _onInstalled(id);
+    });
+    ref.onDispose(sub.cancel);
+    Future.microtask(refresh);
+    return {
+      for (final m in voiceModels)
+        m.id: const ModelProgress(ModelStatus.checking),
+    };
+  }
+
+  Future<void> refresh() async {
+    final manager = ref.read(modelManagerProvider);
+    final next = <String, ModelProgress>{};
+    for (final m in voiceModels) {
+      final current = state[m.id];
+      if (current != null && current.busy) {
+        next[m.id] = current;
+        continue;
+      }
+      if (await manager.checkInstalled(m)) {
+        next[m.id] = const ModelProgress(ModelStatus.installed);
+      } else {
+        next[m.id] = ModelProgress(
+          ModelStatus.notInstalled,
+          received: await manager.partialBytes(m),
+          total: m.archiveBytes,
+        );
+      }
+    }
+    state = next;
+  }
+
+  Future<void> install(VoiceModel m) async {
+    state = {
+      ...state,
+      m.id: ModelProgress(
+        ModelStatus.downloading,
+        received: await ref.read(modelManagerProvider).partialBytes(m),
+        total: m.archiveBytes,
+      ),
+    };
+    await ref.read(modelManagerProvider).install(m);
+  }
+
+  void cancel(VoiceModel m) => ref.read(modelManagerProvider).cancel(m);
+
+  Future<void> delete(VoiceModel m) async {
+    await ref.read(sherpaTtsProvider).unload(m.id);
+    await ref.read(modelManagerProvider).delete(m);
+    // Fall back to the system voice if no model is left for the language.
+    if (!await ref.read(sherpaTtsProvider).supports(m.lang)) {
+      await ref
+          .read(settingsProvider.notifier)
+          .update(
+            (s) =>
+                s.copyWith(engines: {...s.engines, m.lang: TtsEngineId.system}),
+          );
+    }
+  }
+
+  /// A freshly installed model becomes the voice for its language.
+  Future<void> _onInstalled(String id) async {
+    final m = modelById(id);
+    if (m == null) return;
+    ref.read(ttsRouterProvider).resetFailures();
+    await ref.read(settingsProvider.notifier).update((s) {
+      final voices = Map.of(s.voices)
+        ..[AppSettings.voiceKey(m.lang, TtsEngineId.sherpa)] =
+            '${m.id}:${m.defaultSpeaker}';
+      return s.copyWith(
+        engines: {...s.engines, m.lang: TtsEngineId.sherpa},
+        voices: voices,
+      );
+    });
+  }
+}
+
+final modelStatesProvider =
+    NotifierProvider<ModelStates, Map<String, ModelProgress>>(ModelStates.new);

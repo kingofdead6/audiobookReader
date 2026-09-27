@@ -469,6 +469,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tip: tap any sentence to start reading from there.'**
   String get tapSentenceHint;
+
+  /// No description provided for @voiceModels.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice models'**
+  String get voiceModels;
+
+  /// No description provided for @voiceModelsIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Natural voices run entirely on this phone. They are downloaded once from the open-source sherpa-onnx project on GitHub and kept in the app\'s storage. On a new phone, download them again here.'**
+  String get voiceModelsIntro;
+
+  /// No description provided for @download.
+  ///
+  /// In en, this message translates to:
+  /// **'Download'**
+  String get download;
+
+  /// No description provided for @resume.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get resume;
+
+  /// No description provided for @installed.
+  ///
+  /// In en, this message translates to:
+  /// **'Installed'**
+  String get installed;
+
+  /// No description provided for @notDownloaded.
+  ///
+  /// In en, this message translates to:
+  /// **'Not downloaded'**
+  String get notDownloaded;
+
+  /// No description provided for @downloadedOf.
+  ///
+  /// In en, this message translates to:
+  /// **'{received} of {total} MB'**
+  String downloadedOf(String received, String total);
+
+  /// No description provided for @verifying.
+  ///
+  /// In en, this message translates to:
+  /// **'Verifying file integrity…'**
+  String get verifying;
+
+  /// No description provided for @extracting.
+  ///
+  /// In en, this message translates to:
+  /// **'Unpacking… this can take a minute or two.'**
+  String get extracting;
+
+  /// No description provided for @sizeMb.
+  ///
+  /// In en, this message translates to:
+  /// **'{size} MB'**
+  String sizeMb(String size);
+
+  /// No description provided for @freeSpace.
+  ///
+  /// In en, this message translates to:
+  /// **'Free space on device: {size} MB'**
+  String freeSpace(String size);
+
+  /// No description provided for @engineSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get engineSystem;
+
+  /// No description provided for @engineQari.
+  ///
+  /// In en, this message translates to:
+  /// **'Qari (offline)'**
+  String get engineQari;
+
+  /// No description provided for @getVoicesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Get natural voices'**
+  String get getVoicesTitle;
+
+  /// No description provided for @getVoicesBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Download the Kokoro English and Kareem Arabic voices (about 200 MB, once) for much more natural reading. The system voice works in the meantime.'**
+  String get getVoicesBody;
+
+  /// No description provided for @later.
+  ///
+  /// In en, this message translates to:
+  /// **'Later'**
+  String get later;
+
+  /// No description provided for @downloadVoiceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Download a Qari voice for this language to use it.'**
+  String get downloadVoiceHint;
+
+  /// No description provided for @deleteModelConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete “{title}”? You can download it again later.'**
+  String deleteModelConfirm(String title);
 }
 
 class _AppLocalizationsDelegate

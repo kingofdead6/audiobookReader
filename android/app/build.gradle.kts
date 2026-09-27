@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId = "com.qari.qari"
-        // 24 = Android 7.0; required by sherpa-onnx and audio_service.
+        // Android 7.0+ (plugins need 21; 24 keeps testing scope sane).
         minSdk = 24
         targetSdk = flutter.targetSdkVersion
         // Uses the version code from pubspec.yaml. When using split APKs, 1000 * ABI_VERSION
