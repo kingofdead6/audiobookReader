@@ -79,5 +79,12 @@
   "getVoicesBody": "نزّل صوت Kokoro الإنجليزي وصوت كريم العربي (حوالي 200 ميغابايت، مرة واحدة) لقراءة أكثر طبيعية. يعمل صوت النظام في هذه الأثناء.",
   "later": "لاحقًا",
   "downloadVoiceHint": "نزّل صوت قارئ لهذه اللغة لاستخدامه.",
-  "deleteModelConfirm": "حذف «{title}»؟ يمكنك تنزيله مجددًا لاحقًا."
+  "deleteModelConfirm": "حذف «{title}»؟ يمكنك تنزيله مجددًا لاحقًا.",
+  "speed": "السرعة",
+  "sleepTimer": "مؤقت النوم",
+  "sleepOff": "إيقاف",
+  "minutesN": "{n} دقيقة",
+  "endOfPage": "نهاية هذه الصفحة",
+  "sleepRemaining": "يتوقف بعد {time}",
+  "continueListening": "متابعة الاستماع"
 }

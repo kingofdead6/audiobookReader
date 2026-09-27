@@ -11,7 +11,7 @@ keys, no analytics.
 | M1 | PDF import, text extraction, Arabic normalization, text preview | ✅ |
 | M2 | System TTS playback, sentence streaming, language switching, highlighting | ✅ |
 | M3 | Voice model download manager + sherpa-onnx (Kokoro EN, Piper AR) | ✅ |
-| M4 | Background playback, resume, speed, sleep timer, library polish | ⏳ |
+| M4 | Background playback, resume, speed, sleep timer, library polish | ✅ |
 
 ## Requirements
 
@@ -33,6 +33,60 @@ Build installable APKs (one per CPU architecture, much smaller than a fat APK):
 flutter build apk --release --split-per-abi
 # most phones: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
 ```
+
+## Testing on a real phone
+
+Enable *Developer options → USB debugging*, connect the phone, then
+`flutter run --release`. Make test PDFs from any HTML page with Chrome's
+*Print → Save as PDF* if you have no mixed-language book at hand.
+
+**M1 – import & extraction**
+1. Tap **Import PDF**, pick an English PDF: progress shows page by page, the
+   book appears with its first-page cover and 0 %.
+2. Book menu (⋮) → **Text preview**: swipe pages; English sentences are
+   tinted one colour, Arabic another; running headers/page numbers are gone.
+3. Import an Arabic PDF (ideally one with diacritics) and a mixed one; Arabic
+   paragraphs are right-aligned and read correctly (no reversed words, no
+   stray diacritic lines).
+4. Import a scanned PDF → "No text found… OCR is not supported". A book with
+   a few image-only pages imports with a ⚠ badge; those pages show a warning.
+5. Import the same file twice → "already in your library". A renamed
+   non-PDF / damaged file → "could not be opened".
+
+**M2 – system voice playback**
+1. Install voices: Android *Settings → Text-to-speech → Speech Services by
+   Google → Install voice data* → English and Arabic.
+2. Tap a book → player. Press ▶: the current sentence is highlighted and
+   followed; there is no gap between sentences.
+3. Mixed page: the voice switches between English and Arabic per sentence.
+4. ⏮ / ⏭ move by one sentence; tap any sentence to read from it; the page
+   icon jumps to a page (image-only pages are skipped).
+5. Settings → Voices: pick a different voice per language and **Test voice**.
+6. Remove the Arabic voice data → playing Arabic shows a banner explaining
+   how to install it.
+
+**M3 – Qari voices (offline neural)**
+1. Library shows **Get natural voices** → **Download**. Download Kokoro and
+   Kareem: progress in MB, then "Verifying…", "Unpacking…" (1–2 min).
+2. Toggle airplane mode mid-download → it fails with **Retry**/**Resume**,
+   continuing from where it stopped. With too little storage you get a
+   clear message before anything is downloaded.
+3. After install, Settings shows **Qari (offline)** selected for that
+   language; play a book in airplane mode — everything works offline.
+4. Pick another Kokoro speaker (e.g. *George · UK ♂*), test it.
+5. Delete a model in Settings → Voice models → that language falls back to
+   the system voice automatically.
+
+**M4 – background & polish**
+1. Start playback, lock the phone: reading continues; the lock screen and
+   notification show the book with ⏮ ⏯ ⏭ controls. Headset buttons work.
+2. Unplug headphones → pauses. Incoming call → pauses, resumes after.
+3. Speed button (1.0×): 0.5×–2× without pitch change; remembered.
+4. Moon button: sleep in 5 min / end of page; the remaining time is shown.
+5. Leave the book mid-page, kill the app, reopen: the library shows the
+   mini-player and the progress %; opening the book resumes on the exact
+   sentence.
+6. Switch the app language to العربية in Settings: the whole UI is RTL.
 
 ## Tests
 

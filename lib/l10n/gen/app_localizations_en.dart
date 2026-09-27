@@ -295,4 +295,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String deleteModelConfirm(String title) {
     return 'Delete “$title”? You can download it again later.';
   }
+
+  @override
+  String get speed => 'Speed';
+
+  @override
+  String get sleepTimer => 'Sleep timer';
+
+  @override
+  String get sleepOff => 'Off';
+
+  @override
+  String minutesN(int n) {
+    return '$n min';
+  }
+
+  @override
+  String get endOfPage => 'End of this page';
+
+  @override
+  String sleepRemaining(String time) {
+    return 'Stops in $time';
+  }
+
+  @override
+  String get continueListening => 'Continue listening';
 }

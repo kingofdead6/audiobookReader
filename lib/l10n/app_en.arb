@@ -193,5 +193,26 @@
         "type": "String"
       }
     }
-  }
+  },
+  "speed": "Speed",
+  "sleepTimer": "Sleep timer",
+  "sleepOff": "Off",
+  "minutesN": "{n} min",
+  "@minutesN": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "endOfPage": "End of this page",
+  "sleepRemaining": "Stops in {time}",
+  "@sleepRemaining": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "continueListening": "Continue listening"
 }

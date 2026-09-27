@@ -15,6 +15,7 @@ import '../preview/text_preview_screen.dart';
 import '../settings/settings_screen.dart';
 import '../widgets/error_text.dart';
 import 'book_card.dart';
+import 'mini_player.dart';
 import 'voice_prompt.dart';
 
 class LibraryScreen extends ConsumerWidget {
@@ -86,6 +87,7 @@ class LibraryScreen extends ConsumerWidget {
           ),
         ],
       ),
+      bottomNavigationBar: const MiniPlayer(),
     );
   }
 
@@ -184,6 +186,8 @@ class LibraryScreen extends ConsumerWidget {
       ),
     );
     if (ok != true) return;
+    final player = ref.read(readerPlayerProvider);
+    if (player.book?.id == book.id) await player.close();
     await ref.read(bookRepositoryProvider).deleteBook(book.id);
     for (final f in [book.filePath, book.coverPath]) {
       if (f == null) continue;

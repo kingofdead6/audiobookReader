@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../l10n/gen/app_localizations.dart';
 import '../../playback/reader_player.dart';
+import 'speed_sleep_controls.dart';
 
 /// Bottom transport bar: progress, previous / play-pause / next.
 class PlayerControls extends StatelessWidget {
@@ -50,7 +51,7 @@ class PlayerControls extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const _Slot(),
+                  SpeedButton(state: state),
                   IconButton(
                     tooltip: l.previousSentence,
                     iconSize: 32,
@@ -67,7 +68,7 @@ class PlayerControls extends StatelessWidget {
                     icon: const Icon(Icons.skip_next_rounded),
                     onPressed: () => unawaited(player.next()),
                   ),
-                  const _Slot(),
+                  SleepButton(state: state),
                 ],
               ),
             ],
@@ -76,13 +77,6 @@ class PlayerControls extends StatelessWidget {
       ),
     );
   }
-}
-
-/// Reserved space for speed / sleep controls (M4).
-class _Slot extends StatelessWidget {
-  const _Slot();
-  @override
-  Widget build(BuildContext context) => const SizedBox(width: 56);
 }
 
 class _PlayButton extends StatelessWidget {

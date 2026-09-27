@@ -33,6 +33,7 @@ dependencies:
   flutter_tts: ^4.2.5
   just_audio: ^0.10.6
   audio_session: ^0.2.4
+  audio_service: ^0.18.19
 
   # Voice model download + on-device neural TTS
   dio: ^5.11.1

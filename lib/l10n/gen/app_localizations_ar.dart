@@ -294,4 +294,29 @@ class AppLocalizationsAr extends AppLocalizations {
   String deleteModelConfirm(String title) {
     return 'حذف «$title»؟ يمكنك تنزيله مجددًا لاحقًا.';
   }
+
+  @override
+  String get speed => 'السرعة';
+
+  @override
+  String get sleepTimer => 'مؤقت النوم';
+
+  @override
+  String get sleepOff => 'إيقاف';
+
+  @override
+  String minutesN(int n) {
+    return '$n دقيقة';
+  }
+
+  @override
+  String get endOfPage => 'نهاية هذه الصفحة';
+
+  @override
+  String sleepRemaining(String time) {
+    return 'يتوقف بعد $time';
+  }
+
+  @override
+  String get continueListening => 'متابعة الاستماع';
 }

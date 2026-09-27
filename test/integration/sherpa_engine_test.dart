@@ -44,23 +44,32 @@ void main() {
     });
 
     Future<int> synth(String text, Lang lang, [String? voice]) async {
-      final path = p.join(out.path, '${DateTime.now().microsecondsSinceEpoch}.wav');
+      final path = p.join(
+        out.path,
+        '${DateTime.now().microsecondsSinceEpoch}.wav',
+      );
       await engine.synthesize(text, lang, outPath: path, voiceId: voice);
       return File(path).lengthSync();
     }
 
     test('English with Kokoro (default voice and a chosen voice)', () async {
       expect(await engine.supports(Lang.en), isTrue);
-      expect(await synth('Hello, this is Qari reading your book.', Lang.en),
-          greaterThan(20000));
-      expect(await synth('A British voice.', Lang.en, 'kokoro-en-v1:26'),
-          greaterThan(10000));
+      expect(
+        await synth('Hello, this is Qari reading your book.', Lang.en),
+        greaterThan(20000),
+      );
+      expect(
+        await synth('A British voice.', Lang.en, 'kokoro-en-v1:26'),
+        greaterThan(10000),
+      );
     }, timeout: const Timeout(Duration(minutes: 3)));
 
     test('Arabic with Piper Kareem', () async {
       expect(await engine.supports(Lang.ar), isTrue);
-      expect(await synth('ذهب الولد إلى المدرسة في الصباح الباكر.', Lang.ar),
-          greaterThan(20000));
+      expect(
+        await synth('ذهب الولد إلى المدرسة في الصباح الباكر.', Lang.ar),
+        greaterThan(20000),
+      );
     }, timeout: const Timeout(Duration(minutes: 3)));
 
     test('voices list Kokoro speakers', () async {

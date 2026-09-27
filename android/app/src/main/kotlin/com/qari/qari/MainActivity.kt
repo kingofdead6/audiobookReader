@@ -4,11 +4,13 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.StatFs
 import android.provider.Settings
-import io.flutter.embedding.android.FlutterActivity
+import com.ryanheise.audioservice.AudioServiceActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 
-class MainActivity : FlutterActivity() {
+// AudioServiceActivity shares its FlutterEngine with the background media
+// service, so playback continues when the app is in the background.
+class MainActivity : AudioServiceActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "qari/system")

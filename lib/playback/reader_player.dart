@@ -53,7 +53,7 @@ class ReaderPlayer {
     required this.router,
     required this.cacheDir,
     AudioPlayer? player,
-  }) : _player = player ?? AudioPlayer();
+  }) : _player = player ?? AudioPlayer(handleInterruptions: false);
 
   final BookRepository books;
   final TtsRouter router;
@@ -102,8 +102,14 @@ class ReaderPlayer {
 
   // ---------------------------------------------------------------- open
 
-  Future<void> open(int bookId) async {
+  /// Loads [bookId] at its saved position. With [prefetch] the first
+  /// sentences are synthesized right away so Play starts instantly.
+  Future<void> open(int bookId, {bool prefetch = true}) async {
     if (_book?.id == bookId) {
+      if (prefetch) {
+        await books.markOpened(bookId);
+        _kickWorker();
+      }
       _emit();
       return;
     }
@@ -117,10 +123,10 @@ class ReaderPlayer {
     _current = _total == 0 ? 0 : book.position.globalIndex.clamp(0, _total - 1);
     _finished = false;
     _error = null;
-    await books.markOpened(bookId);
+    if (prefetch) await books.markOpened(bookId);
     await _sentence(_current);
     _emit();
-    _kickWorker(); // first sentence is ready when the user presses play
+    if (prefetch) _kickWorker();
   }
 
   // ------------------------------------------------------------ controls
@@ -209,6 +215,18 @@ class ReaderPlayer {
     if (_wait != null && !_wait!.isCompleted) _wait!.complete();
     await _player.stop();
     _loadedIndex = null;
+    _emit();
+  }
+
+  /// Unloads the current book (e.g. it is being deleted).
+  Future<void> close() async {
+    await stop();
+    setSleepTimer();
+    _invalidateAudio();
+    _book = null;
+    _total = 0;
+    _current = 0;
+    _sentences.clear();
     _emit();
   }
 

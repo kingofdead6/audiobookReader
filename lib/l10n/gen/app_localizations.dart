@@ -577,6 +577,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete “{title}”? You can download it again later.'**
   String deleteModelConfirm(String title);
+
+  /// No description provided for @speed.
+  ///
+  /// In en, this message translates to:
+  /// **'Speed'**
+  String get speed;
+
+  /// No description provided for @sleepTimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep timer'**
+  String get sleepTimer;
+
+  /// No description provided for @sleepOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get sleepOff;
+
+  /// No description provided for @minutesN.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} min'**
+  String minutesN(int n);
+
+  /// No description provided for @endOfPage.
+  ///
+  /// In en, this message translates to:
+  /// **'End of this page'**
+  String get endOfPage;
+
+  /// No description provided for @sleepRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'Stops in {time}'**
+  String sleepRemaining(String time);
+
+  /// No description provided for @continueListening.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue listening'**
+  String get continueListening;
 }
 
 class _AppLocalizationsDelegate
