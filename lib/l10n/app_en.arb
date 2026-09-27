@@ -1,0 +1,126 @@
+{
+  "@@locale": "en",
+  "appTitle": "Qari",
+  "library": "Library",
+  "importPdf": "Import PDF",
+  "emptyLibraryTitle": "No books yet",
+  "emptyLibraryHint": "Import a PDF book and Qari will read it aloud in English and Arabic.",
+  "importing": "Importing…",
+  "importStageCopying": "Copying file…",
+  "importStageExtracting": "Extracting text: page {done} of {total}",
+  "@importStageExtracting": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "importStageProcessing": "Cleaning text and splitting sentences…",
+  "importStageSaving": "Saving…",
+  "importDone": "Imported “{title}”",
+  "@importDone": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "importFailed": "Import failed",
+  "errorCorruptPdf": "This PDF could not be opened. The file may be damaged.",
+  "errorPasswordProtected": "This PDF is password-protected. Remove the password and try again.",
+  "errorNoTextLayer": "No text found in this PDF. It looks like a scanned book; OCR is not supported yet.",
+  "errorAlreadyImported": "This book is already in your library: {title}",
+  "@errorAlreadyImported": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "errorLowStorage": "Not enough free storage on the device.",
+  "errorDownloadFailed": "Download failed. Check your connection and try again.",
+  "errorChecksum": "The downloaded file is corrupted. Please retry.",
+  "errorEngineFailed": "The voice engine failed; switched to the system voice.",
+  "errorLanguageUnavailable": "No {language} voice is installed on this phone. Install it in Android Settings → Text-to-speech, or download the Qari voice.",
+  "@errorLanguageUnavailable": {
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
+  "errorUnknown": "Something went wrong.",
+  "textPreview": "Text preview",
+  "pageN": "Page {page}",
+  "@pageN": {
+    "placeholders": {
+      "page": {
+        "type": "int"
+      }
+    }
+  },
+  "pageNofM": "Page {page} of {total}",
+  "@pageNofM": {
+    "placeholders": {
+      "page": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "noTextOnPage": "No text on this page (scanned image or blank). It will be skipped.",
+  "pagesWithoutText": "{count, plural, =1{1 page has no text and will be skipped} other{{count} pages have no text and will be skipped}}",
+  "@pagesWithoutText": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "deleteBook": "Delete",
+  "deleteBookConfirm": "Delete “{title}” from the library?",
+  "@deleteBookConfirm": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "cancel": "Cancel",
+  "ok": "OK",
+  "retry": "Retry",
+  "go": "Go",
+  "settings": "Settings",
+  "appLanguage": "App language",
+  "followSystem": "System default",
+  "theme": "Theme",
+  "themeDark": "Dark",
+  "themeLight": "Light",
+  "themeSystem": "System",
+  "percentRead": "{percent}% read",
+  "@percentRead": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "jumpToPage": "Jump to page",
+  "english": "English",
+  "arabic": "Arabic",
+  "sentenceCount": "{count} sentences",
+  "@sentenceCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "legendEnglish": "English",
+  "legendArabic": "Arabic"
+}
