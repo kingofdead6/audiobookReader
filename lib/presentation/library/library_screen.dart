@@ -10,20 +10,19 @@ import '../../app/providers.dart';
 import '../../domain/entities/book.dart';
 import '../../domain/usecases/import_book.dart';
 import '../../l10n/gen/app_localizations.dart';
+import '../player/player_screen.dart';
 import '../preview/text_preview_screen.dart';
 import '../settings/settings_screen.dart';
 import '../widgets/error_text.dart';
 import 'book_card.dart';
 
-/// Called when a book is tapped. Replaced by the player in M2.
-typedef OpenBook = void Function(BuildContext context, Book book);
-
 class LibraryScreen extends ConsumerWidget {
   const LibraryScreen({super.key});
 
-  static OpenBook openBook = (context, book) => Navigator.of(context).push(
-    MaterialPageRoute<void>(builder: (_) => TextPreviewScreen(bookId: book.id)),
-  );
+  static void openBook(BuildContext context, Book book) => Navigator.of(context)
+      .push(
+        MaterialPageRoute<void>(builder: (_) => PlayerScreen(bookId: book.id)),
+      );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

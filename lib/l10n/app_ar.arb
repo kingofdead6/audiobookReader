@@ -46,5 +46,20 @@
   "arabic": "العربية",
   "sentenceCount": "{count} جملة",
   "legendEnglish": "إنجليزي",
-  "legendArabic": "عربي"
+  "legendArabic": "عربي",
+  "play": "تشغيل",
+  "pause": "إيقاف مؤقت",
+  "previousSentence": "الجملة السابقة",
+  "nextSentence": "الجملة التالية",
+  "preparingVoice": "جارٍ تجهيز الصوت…",
+  "finishedBook": "وصلت إلى نهاية الكتاب.",
+  "voices": "الأصوات",
+  "voiceFor": "صوت {language}",
+  "systemVoiceDefault": "افتراضي النظام",
+  "testVoice": "تجربة الصوت",
+  "testSentenceEn": "This is how English text will sound.",
+  "testSentenceAr": "هكذا سيبدو النص العربي عند قراءته.",
+  "ttsSettings": "إعدادات تحويل النص إلى كلام في أندرويد",
+  "noVoicesFound": "لم يُعثر على أصوات غير متصلة لهذه اللغة.",
+  "tapSentenceHint": "تلميح: اضغط على أي جملة لبدء القراءة منها."
 }

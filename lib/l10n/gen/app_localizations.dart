@@ -379,6 +379,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Arabic'**
   String get legendArabic;
+
+  /// No description provided for @play.
+  ///
+  /// In en, this message translates to:
+  /// **'Play'**
+  String get play;
+
+  /// No description provided for @pause.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get pause;
+
+  /// No description provided for @previousSentence.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous sentence'**
+  String get previousSentence;
+
+  /// No description provided for @nextSentence.
+  ///
+  /// In en, this message translates to:
+  /// **'Next sentence'**
+  String get nextSentence;
+
+  /// No description provided for @preparingVoice.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing voice…'**
+  String get preparingVoice;
+
+  /// No description provided for @finishedBook.
+  ///
+  /// In en, this message translates to:
+  /// **'You reached the end of the book.'**
+  String get finishedBook;
+
+  /// No description provided for @voices.
+  ///
+  /// In en, this message translates to:
+  /// **'Voices'**
+  String get voices;
+
+  /// No description provided for @voiceFor.
+  ///
+  /// In en, this message translates to:
+  /// **'{language} voice'**
+  String voiceFor(String language);
+
+  /// No description provided for @systemVoiceDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'System default'**
+  String get systemVoiceDefault;
+
+  /// No description provided for @testVoice.
+  ///
+  /// In en, this message translates to:
+  /// **'Test voice'**
+  String get testVoice;
+
+  /// No description provided for @testSentenceEn.
+  ///
+  /// In en, this message translates to:
+  /// **'This is how English text will sound.'**
+  String get testSentenceEn;
+
+  /// No description provided for @testSentenceAr.
+  ///
+  /// In en, this message translates to:
+  /// **'هكذا سيبدو النص العربي عند قراءته.'**
+  String get testSentenceAr;
+
+  /// No description provided for @ttsSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Android text-to-speech settings'**
+  String get ttsSettings;
+
+  /// No description provided for @noVoicesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No offline voices found for this language.'**
+  String get noVoicesFound;
+
+  /// No description provided for @tapSentenceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tip: tap any sentence to start reading from there.'**
+  String get tapSentenceHint;
 }
 
 class _AppLocalizationsDelegate

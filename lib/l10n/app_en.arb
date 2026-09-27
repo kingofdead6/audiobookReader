@@ -122,5 +122,27 @@
     }
   },
   "legendEnglish": "English",
-  "legendArabic": "Arabic"
+  "legendArabic": "Arabic",
+  "play": "Play",
+  "pause": "Pause",
+  "previousSentence": "Previous sentence",
+  "nextSentence": "Next sentence",
+  "preparingVoice": "Preparing voice…",
+  "finishedBook": "You reached the end of the book.",
+  "voices": "Voices",
+  "voiceFor": "{language} voice",
+  "@voiceFor": {
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
+  "systemVoiceDefault": "System default",
+  "testVoice": "Test voice",
+  "testSentenceEn": "This is how English text will sound.",
+  "testSentenceAr": "هكذا سيبدو النص العربي عند قراءته.",
+  "ttsSettings": "Android text-to-speech settings",
+  "noVoicesFound": "No offline voices found for this language.",
+  "tapSentenceHint": "Tip: tap any sentence to start reading from there."
 }

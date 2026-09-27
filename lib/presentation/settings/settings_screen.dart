@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../app/providers.dart';
+import '../../data/system_channel.dart';
 import '../../domain/entities/app_settings.dart';
+import '../../domain/entities/lang.dart';
 import '../../l10n/gen/app_localizations.dart';
+import 'voice_section.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -57,6 +60,15 @@ class SettingsScreen extends ConsumerWidget {
               onSelectionChanged: (v) =>
                   ctrl.update((x) => x.copyWith(themeMode: v.first)),
             ),
+          ),
+          _Header(l.voices),
+          const VoiceSection(lang: Lang.en),
+          const VoiceSection(lang: Lang.ar),
+          ListTile(
+            leading: const Icon(Icons.settings_voice_outlined),
+            title: Text(l.ttsSettings),
+            trailing: const Icon(Icons.open_in_new, size: 18),
+            onTap: () => const SystemChannel().openTtsSettings(),
           ),
           const SizedBox(height: 24),
         ],

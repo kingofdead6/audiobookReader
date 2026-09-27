@@ -183,4 +183,51 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get legendArabic => 'عربي';
+
+  @override
+  String get play => 'تشغيل';
+
+  @override
+  String get pause => 'إيقاف مؤقت';
+
+  @override
+  String get previousSentence => 'الجملة السابقة';
+
+  @override
+  String get nextSentence => 'الجملة التالية';
+
+  @override
+  String get preparingVoice => 'جارٍ تجهيز الصوت…';
+
+  @override
+  String get finishedBook => 'وصلت إلى نهاية الكتاب.';
+
+  @override
+  String get voices => 'الأصوات';
+
+  @override
+  String voiceFor(String language) {
+    return 'صوت $language';
+  }
+
+  @override
+  String get systemVoiceDefault => 'افتراضي النظام';
+
+  @override
+  String get testVoice => 'تجربة الصوت';
+
+  @override
+  String get testSentenceEn => 'This is how English text will sound.';
+
+  @override
+  String get testSentenceAr => 'هكذا سيبدو النص العربي عند قراءته.';
+
+  @override
+  String get ttsSettings => 'إعدادات تحويل النص إلى كلام في أندرويد';
+
+  @override
+  String get noVoicesFound => 'لم يُعثر على أصوات غير متصلة لهذه اللغة.';
+
+  @override
+  String get tapSentenceHint => 'تلميح: اضغط على أي جملة لبدء القراءة منها.';
 }

@@ -182,4 +182,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get legendArabic => 'Arabic';
+
+  @override
+  String get play => 'Play';
+
+  @override
+  String get pause => 'Pause';
+
+  @override
+  String get previousSentence => 'Previous sentence';
+
+  @override
+  String get nextSentence => 'Next sentence';
+
+  @override
+  String get preparingVoice => 'Preparing voice…';
+
+  @override
+  String get finishedBook => 'You reached the end of the book.';
+
+  @override
+  String get voices => 'Voices';
+
+  @override
+  String voiceFor(String language) {
+    return '$language voice';
+  }
+
+  @override
+  String get systemVoiceDefault => 'System default';
+
+  @override
+  String get testVoice => 'Test voice';
+
+  @override
+  String get testSentenceEn => 'This is how English text will sound.';
+
+  @override
+  String get testSentenceAr => 'هكذا سيبدو النص العربي عند قراءته.';
+
+  @override
+  String get ttsSettings => 'Android text-to-speech settings';
+
+  @override
+  String get noVoicesFound => 'No offline voices found for this language.';
+
+  @override
+  String get tapSentenceHint =>
+      'Tip: tap any sentence to start reading from there.';
 }

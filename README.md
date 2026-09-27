@@ -9,7 +9,7 @@ keys, no analytics.
 | Milestone | Scope | State |
 |---|---|---|
 | M1 | PDF import, text extraction, Arabic normalization, text preview | ✅ |
-| M2 | System TTS playback, sentence streaming, language switching, highlighting | ⏳ |
+| M2 | System TTS playback, sentence streaming, language switching, highlighting | ✅ |
 | M3 | Voice model download manager + sherpa-onnx (Kokoro EN, Piper AR) | ⏳ |
 | M4 | Background playback, resume, speed, sleep timer, library polish | ⏳ |
 
